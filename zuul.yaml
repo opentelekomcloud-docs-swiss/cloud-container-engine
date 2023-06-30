@@ -2,7 +2,7 @@
     merge-mode: squash-merge
     default-branch: main
     templates:
-      - helpcenter-base-jobs
+      - helpcenter-swiss-base-jobs
     check:
       jobs:
         - noop
