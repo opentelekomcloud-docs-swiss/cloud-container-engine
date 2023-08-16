@@ -23,11 +23,21 @@ extensions = [
 
 otcdocs_auto_name = False
 otcdocs_auto_version = False
-otcdocs_search_environment = 'hc_swiss'
 
 project = 'Cloud Container Engine'
 otcdocs_repo_name = 'opentelekomcloud-docs-swiss/cloud-container-engine'
 # Those variables are required for edit/bug links
+
+# Those variables are needed for indexing into OpenSearch
+otcdocs_doc_environment = 'public'
+otcdocs_doc_link = '/cloud-container-engine/umn/'
+otcdocs_doc_title = 'User Guide'
+otcdocs_doc_type = 'umn'
+otcdocs_service_category = 'container'
+otcdocs_service_title = 'Cloud Container Engine'
+otcdocs_service_type = 'cce'
+otcdocs_search_environment = 'hc_swiss'
+otcdocs_search_url = "https://opensearch.eco.tsi-dev.otc-service.com/"
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
