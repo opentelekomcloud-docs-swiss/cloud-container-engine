@@ -37,6 +37,7 @@ otcdocs_service_category = 'container'
 otcdocs_service_title = 'Cloud Container Engine'
 otcdocs_service_type = 'cce'
 otcdocs_search_environment = 'hc_swiss'
+otcdocs_search_index = 'search_index_swiss'
 otcdocs_search_url = "https://opensearch.eco.tsi-dev.otc-service.com/"
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -87,7 +88,7 @@ html_theme = 'otcdocs'
 # further. For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "site_name": "Open Telekom Cloud Swiss Documentation Portal",
+    "site_name": "Swiss Open Telekom Cloud Docs",
     "logo_url": "https://docs-beta.sc.otc.t-systems.com",
 }
 
