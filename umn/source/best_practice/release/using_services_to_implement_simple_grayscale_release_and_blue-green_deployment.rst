@@ -5,7 +5,7 @@
 Using Services to Implement Simple Grayscale Release and Blue-Green Deployment
 ==============================================================================
 
-To implement grayscale release for a CCE cluster, you need to deploy other open-source tools, such as Nginx Ingress, to the cluster or deploy services to a service mesh. These solutions are difficult to implement. If your grayscale release requirements are simple and you do not want to introduce too many plug-ins or complex configurations, you can refer to this section to implement simple grayscale release and blue-green deployment based on native Kubernetes features.
+To implement grayscale release for a CCE cluster, deploy other open-source tools, such as Nginx Ingress, to the cluster or deploy services to a service mesh. These solutions are difficult to implement. If your grayscale release requirements are simple and you do not want to introduce too many plug-ins or complex configurations, you can refer to this section to implement simple grayscale release and blue-green deployment based on native Kubernetes features.
 
 Principles
 ----------
@@ -143,7 +143,7 @@ Step 2: Implement Grayscale Release
 
    <EXTERNAL_IP> indicates the IP address of the ELB load balancer.
 
-   The command output is as follows. Half of the responses are from the Deployment of version v1, and the other half are from version v2.
+   The command output is as follows (Half of the responses are from the Deployment of version v1, and the other half are from version v2):
 
    .. code-block::
 
@@ -259,6 +259,6 @@ Step 3: Implement Blue-Green Deployment
       Nginx-v2
       Nginx-v2
 
-.. |image1| image:: /_static/images/en-us_image_0000001169475948.png
-.. |image2| image:: /_static/images/en-us_image_0000001168997466.png
-.. |image3| image:: /_static/images/en-us_image_0000001214635805.png
+.. |image1| image:: /_static/images/en-us_image_0000001851585496.png
+.. |image2| image:: /_static/images/en-us_image_0000001851585500.png
+.. |image3| image:: /_static/images/en-us_image_0000001851744224.png

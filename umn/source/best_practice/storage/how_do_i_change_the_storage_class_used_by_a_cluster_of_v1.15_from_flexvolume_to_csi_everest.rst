@@ -441,8 +441,6 @@ Procedure
 
       **kubectl edit sts sts-example -n** xxx
 
-      |image1|
-
       .. note::
 
          Replace **sts-example** in the preceding command with the actual name of the StatefulSet to upgrade. **xxx** indicates the namespace to which the StatefulSet belongs.
@@ -591,5 +589,3 @@ Procedure
       If the cluster has been upgraded before the storage migration, PVs may fail to be deleted. You can remove the PV protection field **finalizers** to delete PVs.
 
       kubectl patch pv {pv_name} -p '{"metadata":{"finalizers":null}}'
-
-.. |image1| image:: /_static/images/en-us_image_0000001097062729.png

@@ -44,21 +44,19 @@ For details about how to restore the metadata, see the "Notes" section in `Obtai
 
    On the **Clusters** page of the CCE console, view the network model and container CIDR of the cluster.
 
-   |image1|
-
 #. Prevent the container from obtaining host metadata.
 
    -  VPC network
 
-      a. Log in to each node in the CCE cluster as user **root** and run the following command:
+      a. Log in to each node in the cluster as user **root** and run the following command:
 
          .. code-block::
 
             iptables -I OUTPUT -s {container_cidr} -d 169.254.169.254 -j REJECT
 
-         *{container_cidr}* indicates the container CIDR of the cluster, for example, 10.0.0.0/16.
+         *{container_cidr}* indicates the container CIDR of the cluster, for example, **10.0.0.0/16**.
 
-         To ensure configuration persistence, you are advised to write the command to the **/etc/rc.local** script.
+         To ensure configuration persistence, write the command to the **/etc/rc.local** script.
 
       b. Run the following commands in the container to access the **userdata** and **metadata** interfaces of OpenStack and check whether the request is intercepted:
 
@@ -69,15 +67,15 @@ For details about how to restore the metadata, see the "Notes" section in `Obtai
 
    -  Container tunnel network
 
-      a. Log in to each node in the CCE cluster as user **root** and run the following command:
+      a. Log in to each node in the cluster as user **root** and run the following command:
 
          .. code-block::
 
             iptables -I FORWARD -s {container_cidr} -d 169.254.169.254 -j REJECT
 
-         *{container_cidr}* indicates the container CIDR of the cluster, for example, 10.0.0.0/16.
+         *{container_cidr}* indicates the container CIDR of the cluster, for example, **10.0.0.0/16**.
 
-         To ensure configuration persistence, you are advised to write the command to the **/etc/rc.local** script.
+         To ensure configuration persistence, write the command to the **/etc/rc.local** script.
 
       b. Run the following commands in the container to access the **userdata** and **metadata** interfaces of OpenStack and check whether the request is intercepted:
 
@@ -85,5 +83,3 @@ For details about how to restore the metadata, see the "Notes" section in `Obtai
 
             curl 169.254.169.254/openstack/latest/meta_data.json
             curl 169.254.169.254/openstack/latest/user_data
-
-.. |image1| image:: /_static/images/en-us_image_0000001226818003.png

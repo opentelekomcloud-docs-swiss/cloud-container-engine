@@ -5,7 +5,7 @@
 Enabling Automatic Topology for EVS Disks When Nodes Are Deployed in Different AZs (csi-disk-topology)
 ======================================================================================================
 
-Challenges
+Background
 ----------
 
 EVS disks cannot be attached to a node deployed in another AZ. For example, the EVS disks in AZ 1 cannot be attached to a node in AZ 2. If the storage class csi-disk is used for StatefulSets, when a StatefulSet is scheduled, a PVC and a PV are created immediately (an EVS disk is created along with the PV), and then the PVC is bound to the PV. However, when the cluster nodes are located in multiple AZs, the EVS disk created by the PVC and the node to which the pods are scheduled may be in different AZs. As a result, the pods fail to be scheduled.
@@ -314,5 +314,5 @@ After the creation, check the PVC and pod status. As shown in the following outp
    nginx-2   1/1     Running   0          32s   172.16.0.137   192.168.0.211   <none>           <none>
    nginx-3   1/1     Running   0          19s   172.16.1.9     192.168.0.240   <none>           <none>
 
-.. |image1| image:: /_static/images/en-us_image_0000001113962636.png
-.. |image2| image:: /_static/images/en-us_image_0000001160642447.png
+.. |image1| image:: /_static/images/en-us_image_0000001898024061.png
+.. |image2| image:: /_static/images/en-us_image_0000001897904533.png

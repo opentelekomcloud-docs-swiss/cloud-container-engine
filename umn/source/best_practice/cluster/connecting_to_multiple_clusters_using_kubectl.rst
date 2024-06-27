@@ -5,8 +5,8 @@
 Connecting to Multiple Clusters Using kubectl
 =============================================
 
-Painpoint
----------
+Background
+----------
 
 When you have multiple CCE clusters, you may find it difficult to efficiently connect to all of them.
 
@@ -16,7 +16,7 @@ Solution
 This section describes how to configure access to multiple clusters by modifying **kubeconfig.json**. The file describes multiple clusters, users, and contexts. To access different clusters, run the **kubectl config use-context** command to switch between contexts.
 
 
-.. figure:: /_static/images/en-us_image_0261820020.png
+.. figure:: /_static/images/en-us_image_0000001898024121.png
    :alt: **Figure 1** Using kubectl to connect to multiple clusters
 
    **Figure 1** Using kubectl to connect to multiple clusters
@@ -30,8 +30,6 @@ Introduction to kubeconfig.json
 -------------------------------
 
 kubeconfig.json is the configuration file of kubectl. You can download it on the cluster details page.
-
-|image1|
 
 The content of kubeconfig.json is as follows:
 
@@ -284,7 +282,7 @@ This example configures only the public network access to the clusters. If you w
 Verification
 ------------
 
-Run the following commands to copy the file to the kubectl configuration path:
+Run the following command to copy the conbined file to the kubectl configuration path:
 
 **mkdir -p $HOME/.kube**
 
@@ -309,5 +307,3 @@ Run the kubectl commands to check whether the two clusters can be connected.
    CoreDNS is running at https://124.xxx.xxx.xxx:5443/api/v1/namespaces/kube-system/services/coredns:dns/proxy
 
    To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
-
-.. |image1| image:: /_static/images/en-us_image_0000001274882416.png

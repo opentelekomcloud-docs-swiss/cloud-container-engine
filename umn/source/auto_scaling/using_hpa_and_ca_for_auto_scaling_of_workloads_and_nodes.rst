@@ -5,12 +5,12 @@
 Using HPA and CA for Auto Scaling of Workloads and Nodes
 ========================================================
 
-Scenario
---------
+Application Scenarios
+---------------------
 
 The best way to handle surging traffic is to automatically adjust the number of machines based on the traffic volume or resource usage, which is called scaling.
 
-In CCE, the resources that can be used by containers are fixed during application deployment. Therefore, in auto scaling, pods are scaled first. The node resource usage increases only after the number of pods increases. Then, nodes can be scaled based on the node resource usage. How to configure auto scaling in CCE?
+When pods or containers are used for deploying applications, the upper limit of available resources is typically required to set for pods or containers to prevent unlimited usage of node resources during peak hours. However, after the upper limit is reached, an application error may occur. To resolve this issue, scale in the number of pods to share workloads. If the node resource usage increases to a certain extent that newly added pods cannot be scheduled, scale in the number of nodes based on the node resource usage.
 
 Solution
 --------
@@ -23,7 +23,7 @@ As shown in :ref:`Figure 1 <cce_10_0300__cce_bestpractice_00282_fig6540132372015
 
 .. _cce_10_0300__cce_bestpractice_00282_fig6540132372015:
 
-.. figure:: /_static/images/en-us_image_0000001518222708.png
+.. figure:: /_static/images/en-us_image_0000001851744000.png
    :alt: **Figure 1** HPA and CA working flows
 
    **Figure 1** HPA and CA working flows
@@ -35,7 +35,7 @@ This section uses an example to describe the auto scaling process using HPA and 
 Preparations
 ------------
 
-#. Create a cluster with one node. The node should have 2 cores of CPU and 4 GB of memory, or a higher specification, as well as an EIP to allow external access. If no EIP is bound to the node during node creation, you can manually bind one on the ECS console after creating the node.
+#. Create a cluster with one node. The node should have 2 cores of vCPUs and 4 GiB of memory, or a higher specification, as well as an EIP to allow external access. If no EIP is bound to the node during node creation, you can manually bind one on the ECS console after creating the node.
 #. Install add-ons for the cluster.
 
    -  autoscaler: node scaling add-on
@@ -49,7 +49,7 @@ Preparations
 
          vi index.php
 
-      Example file content:
+      The file content is as follows:
 
       .. code-block::
 
@@ -61,13 +61,13 @@ Preparations
            echo "OK!";
          ?>
 
-   b. Compile a Dockerfile to build an image.
+   b. Compile a **Dockerfile** file to build an image.
 
       .. code-block::
 
          vi Dockerfile
 
-      Example Dockerfile:
+      The content is as follows:
 
       .. code-block::
 
@@ -83,7 +83,7 @@ Preparations
 
    d. .. _cce_10_0300__cce_bestpractice_00282_li108181514125:
 
-      (Optional) Log in to the SWR console, choose **Organization Management** in the navigation pane, and click **Create Organization** in the upper right corner to create an organization.
+      (Optional) Log in to the SWR console, choose **Organizations** in the navigation pane, and click **Create Organization** in the upper right corner to create an organization.
 
       Skip this step if you already have an organization.
 
@@ -95,24 +95,24 @@ Preparations
 
    g. Tag the hpa-example image.
 
-      **docker tag** **[Image name 1:Tag 1]** **[Image repository address]/[Organization name]/[Image name 2:Tag 2]**
+      **docker tag** *{Image name 1*:*Tag 1}*/*{Image repository address}*/*{Organization name}*/*{Image name 2*:*Tag 2}*
 
-      -  **[Image name 1:Tag 1]**: name and tag of the local image to be uploaded.
-      -  **[Image repository address]**: The domain name at the end of the login command in :ref:`5 <cce_10_0300__cce_bestpractice_00282_li187221141362>` is the image repository address, which can be obtained on the SWR console.
-      -  **[Organization name]**: name of the organization created in :ref:`4 <cce_10_0300__cce_bestpractice_00282_li108181514125>`.
-      -  **[Image name 2:Tag 2]**: desired image name and tag to be displayed on the SWR console.
+      -  *{Image name 1:Tag 1}*: name and tag of the local image to be uploaded.
+      -  *{Image repository address}*: the domain name at the end of the login command in :ref:`login command <cce_10_0300__cce_bestpractice_00282_li187221141362>`. It can be obtained on the SWR console.
+      -  *{Organization name}*: name of the :ref:`created organization <cce_10_0300__cce_bestpractice_00282_li108181514125>`.
+      -  *{Image name 2:Tag 2}*: desired image name and tag to be displayed on the SWR console.
 
-      Example:
+      The following is an example:
 
-      **docker tag hpa-example:latest swr.eu-de.sc.otc.t-systems.com/group/hpa-example:latest**
+      **docker tag** **hpa-example:latest {**\ *Image repository address*\ **}/group/hpa-example:latest**
 
    h. Push the image to the image repository.
 
-      **docker push** **[Image repository address]/[Organization name]/[Image name 2:Tag 2]**
+      **docker push** *{Image repository address}*/*{Organization name}*/*{Image name 2:Tag 2}*
 
-      Example:
+      The following is an example:
 
-      **docker push swr.eu-de.sc.otc.t-systems.com/group/hpa-example:latest**
+      **docker push** **{**\ *Image repository address*\ **}/group/hpa-example:latest**
 
       The following information will be returned upon a successful push:
 
@@ -130,26 +130,24 @@ Creating a Node Pool and a Node Scaling Policy
 
 #. Log in to the CCE console, access the created cluster, click **Nodes** on the left, click the **Node Pools** tab, and click **Create Node Pool** in the upper right corner.
 
-#. Set node pool parameters, add a node with 2 vCPUs and 4 GB memory, and enable auto scaling.
+#. Configure the node pool.
 
    -  **Nodes**: Set it to **1**, indicating that one node is created by default when a node pool is created.
-   -  **Auto Scaling**: Enable the option, meaning that nodes will be automatically created or deleted in the node pool based on the cluster loads.
-   -  **Max. Nodes**: Set it to **5**, indicating the maximum number of nodes in a node pool.
    -  **Specifications**: 2 vCPUs \| 4 GiB
 
    Retain the defaults for other parameters.
 
-#. Click **Add-ons** on the left of the cluster console, click **Edit** under the autoscaler add-on, modify the add-on configuration, enable **Auto node scale-in**, and configure scale-in parameters. For example, trigger scale-in when the node resource utilization is less than 50%.
+#. Locate the row containing the newly created node pool and click **Auto Scaling** in the upper right corner.
 
-   |image2|
+   If the CCE Cluster Autoscaler add-on is not installed in the cluster, install it first.
 
-   After the preceding configurations, scale-out is performed based on the pending status of the pod and scale-in is triggered when the node resource utilization decreases.
+   -  **Automatic scale-out**: If this function is enabled, nodes in a node pool will be automatically added based on the cluster load.
+   -  **Customized Rule**: Click **Add Rule**. In the dialog box displayed, configure parameters. If the CPU allocation rate is greater than 70%, a node is added to each associated node pool. A node scaling policy needs to be associated with a node pool. Multiple node pools can be associated. When you need to scale nodes, node with proper specifications will be added or reduced from the node pool based on the minimum waste principle.
+   -  **Automatic scale-in**: If this function is enabled, nodes in a node pool will be automatically deleted based on the cluster load. For example, trigger scale-in when the node resource utilization is less than 50%.
+   -  **AS Configuration**: Modify the node quantity range. During autoscaling, the number of nodes in a node pool is always within the configured quantity range.
+   -  **AS Object**: Enable autoscaling for node specifications in a node pool.
 
-#. Click **Node Scaling** on the left of the cluster console and click **Create Node Scaling Policy** in the upper right corner. Node scaling policies added here trigger scale-out based on the CPU/memory allocation rate or periodically.
-
-   As shown in the following figure, when the cluster CPU allocation rate is greater than 70%, one node will be added. A node scaling policy needs to be associated with a node pool. Multiple node pools can be associated. When you need to scale nodes, node with proper specifications will be added or reduced from the node pool based on the minimum waste principle.
-
-   |image3|
+#. Click **OK**.
 
 Creating a Workload
 -------------------
@@ -174,7 +172,7 @@ Use the hpa-example image to create a Deployment with one replica. The image pat
        spec:
          containers:
          - name: container-1
-           image: 'hpa-example:latest '  # Replace it with the address of the image you uploaded to SWR.
+           image: 'hpa-example:latest' # Replace it with the address of the image you uploaded to SWR.
            resources:
              limits:                  # The value of limits must be the same as that of requests to prevent flapping during scaling.
                cpu: 500m
@@ -231,11 +229,9 @@ There are two other annotations. One annotation defines the CPU thresholds, indi
        - type: Resource
          resource:
            name: cpu
-           targetAverageUtilization: 50
-
-Set the parameters as follows if you are using the console.
-
-|image4|
+           target:
+             type: Utilization
+             averageUtilization: 50
 
 Observing the Auto Scaling Process
 ----------------------------------
@@ -263,7 +259,7 @@ Observing the Auto Scaling Process
 
    .. note::
 
-      If no EIP is displayed, the cluster node has not been assigned any EIP. You need to create one, bind it to the node, and synchronize node data. .
+      If no EIP is displayed, the cluster node has not been assigned any EIP. Allocate one, bind it to the node, and synchronize node data. .
 
    Observe the scaling process of the workload.
 
@@ -379,7 +375,4 @@ Summary
 
 Using HPA and CA can easily implement auto scaling in most scenarios. In addition, the scaling process of nodes and pods can be easily observed.
 
-.. |image1| image:: /_static/images/en-us_image_0000001518222700.png
-.. |image2| image:: /_static/images/en-us_image_0000001568902661.png
-.. |image3| image:: /_static/images/en-us_image_0000001569182741.png
-.. |image4| image:: /_static/images/en-us_image_0000001569023029.png
+.. |image1| image:: /_static/images/en-us_image_0000001898024157.png

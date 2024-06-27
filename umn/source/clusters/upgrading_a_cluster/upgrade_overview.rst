@@ -5,74 +5,111 @@
 Upgrade Overview
 ================
 
-To enable interoperability from one Kubernetes installation to the next, you must upgrade your Kubernetes clusters before the maintenance period ends.
+CCE strictly complies with community consistency authentication. It releases three Kubernetes versions each year and offers a maintenance period of at least 24 months after each version is released. CCE ensures the stable running of Kubernetes versions during the maintenance period.
 
-After the latest Kubernetes version is available in CCE, CCE will describe the changes in this version.
+To ensure your service rights and benefits, upgrade your Kubernetes clusters before a maintenance period ends. You can check the Kubernetes version of your cluster on the cluster list page and check whether a new version is available. Proactive cluster upgrades help you:
 
-You can use the CCE console to upgrade the Kubernetes version of a cluster.
+#. Reduce security and stability risks: During the iteration of Kubernetes versions, known security and stability vulnerabilities are continuously fixed. Long-term use of EOS clusters will result in security and stability risks to services.
+#. Experience the latest functions: During the iteration of Kubernetes versions, new functions and optimizations are continuously released. For details about the features of the latest version, see :ref:`Release Notes for CCE Cluster Versions <cce_10_0405>`.
+#. Minimize compatibility risks: During the iteration of Kubernetes versions, APIs are continuously modified and functions are deprecated. If a cluster has not been upgraded for a long time, more O&M assurance investment will be required when the cluster is upgraded. Periodic upgrades can effectively mitigate compatibility risks caused by accumulated version differences. It is a good practice to upgrade a patch version every quarter and upgrade a major version to the latest version every year.
+#. Obtain more effective technical support: CCE does not provide security patches or issue fixing for EOS Kubernetes cluster versions, and does not ensure technical support for the EOS versions.
 
-An upgrade flag will be displayed on the cluster card view if there is a new version for the cluster to upgrade.
+Cluster Upgrade Path
+--------------------
 
-**How to check:**
+CCE clusters evolve iteratively based on the community Kubernetes version. A CCE cluster version consists of the community Kubernetes version and the CCE patch version. Therefore, two cluster upgrade paths are provided.
 
-Log in to the CCE console and check whether the message "New version available" is displayed in the lower left corner of the cluster. If yes, the cluster can be upgraded. If no, the cluster cannot be upgraded.
+-  Upgrading a Kubernetes version
+
+   ========================= =========================
+   Source Kubernetes Version Target Kubernetes Version
+   ========================= =========================
+   v1.13 or earlier          Not supported
+   v1.15                     v1.19
+   v1.17                     v1.19
+   v1.19                     v1.21 or v1.23
+   v1.21                     v1.23 or v1.25
+   v1.23                     v1.25 or v1.27
+   v1.25                     v1.27
+   v1.27                     v1.28
+   ========================= =========================
+
+   .. note::
+
+      -  A version that has been end of maintenance cannot be directly upgraded to the latest version. You need to upgrade such a version for multiple times, for example, from v1.15 to v1.19, v1.23, and then to v1.27/v1.28.
+      -  A Kubernetes version can be upgraded only after the patch is upgraded to the latest version. CCE will automatically generate an optimal upgrade path on the console based on the current cluster version.
+
+-  Upgrading a patch version
+
+   Patch version management is available for CCE clusters of v1.19 or later to provide new features and fix bugs and vulnerability for in-maintenance clusters without requiring a major version upgrade.
+
+   After a new patch version is released, you can directly upgrade any patch version to the latest patch version. For details about the release history of patch versions, see :ref:`Patch Version Release Notes <cce_10_0405>`.
+
+Cluster Upgrade Process
+-----------------------
+
+The cluster upgrade process involves pre-upgrade check, backup, upgrade, and post-upgrade verification.
 
 
-.. figure:: /_static/images/en-us_image_0000001568902653.png
-   :alt: **Figure 1** Cluster with the upgrade flag
+.. figure:: /_static/images/en-us_image_0000001898026645.png
+   :alt: **Figure 1** Process of upgrading a cluster
 
-   **Figure 1** Cluster with the upgrade flag
+   **Figure 1** Process of upgrading a cluster
 
-.. _cce_10_0197__section19981121648:
+After determining the target version of the cluster, read the :ref:`precautions <cce_10_0302__section16520163082115>` carefully and prevent function incompatibility during the upgrade.
 
-Cluster Upgrade
----------------
+#. **Pre-upgrade check**
 
-The following table describes the target version to which each cluster version can be upgraded, the supported upgrade modes, and upgrade impacts.
+   Before a cluster upgrade, CCE checks mandatory items such as the cluster status, add-ons, and nodes to ensure that the cluster meets the upgrade requirements. For more details, see :ref:`Pre-upgrade Check <cce_10_0549>`. If any check item is abnormal, rectify the fault as prompted on the console.
 
-.. table:: **Table 1** Cluster upgrade paths and impacts
+#. **Backup**
 
-   +-----------------------+-----------------------+-----------------------+
-   | Source Version        | Target Version        | Upgrade Modes         |
-   +=======================+=======================+=======================+
-   | v1.23                 | v1.25                 | In-place upgrade      |
-   +-----------------------+-----------------------+-----------------------+
-   | v1.21                 | v1.25                 | In-place upgrade      |
-   |                       |                       |                       |
-   |                       | v1.23                 |                       |
-   +-----------------------+-----------------------+-----------------------+
-   | v1.19                 | v1.23                 | In-place upgrade      |
-   |                       |                       |                       |
-   |                       | v1.21                 |                       |
-   +-----------------------+-----------------------+-----------------------+
-   | v1.17                 | v1.19                 | In-place upgrade      |
-   |                       |                       |                       |
-   | v1.15                 |                       |                       |
-   +-----------------------+-----------------------+-----------------------+
-   | v1.13                 | v1.15                 | Rolling upgrade       |
-   |                       |                       |                       |
-   |                       |                       | Replace upgrade       |
-   +-----------------------+-----------------------+-----------------------+
+   You can use disk snapshots to back up master node data, including CCE component images, component configurations, and etcd data. Back up data before an upgrade. If unexpected cases occur during an upgrade, you can use the backup to quickly restore the cluster.
+
+   +-------------------------+------------------------------------------------------------------------------------+----------------------------------------------------+-------------------------------------------------------------------------------+---------------+-------------------------------------------------------------------+
+   | Backup Type             | Backup Object                                                                      | Backup Mode                                        | Backup Time                                                                   | Rollback Time | Description                                                       |
+   +=========================+====================================================================================+====================================================+===============================================================================+===============+===================================================================+
+   | etcd data backup        | etcd data                                                                          | Automatic backup during an upgrade                 | 1-5 minutes                                                                   | 2 hours       | Mandatory. The data is automatically backed up during an upgrade. |
+   +-------------------------+------------------------------------------------------------------------------------+----------------------------------------------------+-------------------------------------------------------------------------------+---------------+-------------------------------------------------------------------+
+   | CBR cloud server backup | Master node disks, including component images, configurations, logs, and etcd data | One-click backup on web pages (manually triggered) | 20 minutes to 2 hours (based on the cloud backup tasks in the current region) | 20 minutes    | This function is gradually replaced by EVS snapshot backup.       |
+   +-------------------------+------------------------------------------------------------------------------------+----------------------------------------------------+-------------------------------------------------------------------------------+---------------+-------------------------------------------------------------------+
+
+#. **Configuration and upgrade**
+
+   Configure parameters before an upgrade. CCE has provided default settings, which can be modified as needed. After the configuration, upgrade add-ons, master nodes, and worker nodes in sequence.
+
+   -  **Add-on Upgrade Configuration**: Add-ons that have been installed in your cluster are listed. During the cluster upgrade, CCE automatically upgrades the selected add-ons to be compatible with the target cluster version. You can click **Set** to re-define the add-on parameters.
+
+      .. note::
+
+         If an add-on is marked with |image1| on its right side, the add-on cannot be compatible with both the source and target versions of the cluster upgrade. In this case, CCE will upgrade the add-on after the cluster upgrade. The add-on may be unavailable during the cluster upgrade.
+
+   -  **Node Upgrade Configuration**
+
+      -  **Max. Nodes for Batch Upgrade**: You can configure the maximum number of nodes to be upgraded in a batch.
+
+         Node pools will be upgraded in sequence. Nodes in node pools will be upgraded in batches. One node is upgraded in the first batch, two nodes in the second batch, and the number of nodes to be upgraded in each subsequent batch increases by a power of 2 until the maximum number of nodes to be upgraded in each batch is reached. The next cluster is upgraded after the previous one is upgraded. By default, 20 nodes are upgraded in a batch, and the number can be increased to the maximum of 60.
+
+      -  **Node Priority**: You can customize node upgrade priorities. If the priorities are not specified, CCE will perform the upgrade based on the priorities generated by the default policy.
+
+         -  **Add Upgrade Priority**: You can custom the priorities for upgrading node pools. If the priorities are not specified, CCE will preferentially upgrade the node pool with the least number of nodes based on the default policy.
+         -  **Add Node Priority**: You can custom the priorities for upgrading nodes in a node pool. If the priorities are not specified, CCE will preferentially upgrade the node with lightest load (calculated based on the number of pods, resource request rate, and number of PVs) based on the default policy.
+
+#. **Post-upgrade verification**
+
+   After an upgrade, CCE will automatically check items including the cluster status and node status. You need to manually check services, new nodes, and new pods to ensure that the cluster functions properly after the upgrade. For details, see :ref:`Performing Post-Upgrade Verification <cce_10_0560>`.
 
 Upgrade Modes
 -------------
 
-The upgrade processes are the same for master nodes. The differences between the upgrade modes of worker nodes are described as follows:
+.. table:: **Table 1** Upgrade modes
 
-.. table:: **Table 2** Differences between upgrade modes and their advantages and disadvantages
+   +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+
+   | Upgrade Mode     | Description                                                                                                                                                    | Upgrade Scope                                                                                        | Advantage                                                                                  | Constraint                                                        |
+   +==================+================================================================================================================================================================+======================================================================================================+============================================================================================+===================================================================+
+   | In-place upgrade | Kubernetes components, network components, and CCE management components are upgraded on nodes. During an upgrade, service pods and networks are not affected. | -  Node OSs are not upgraded.                                                                        | The one-click upgrade does not need to migrate services, which ensures service continuity. | In-place upgrade is supported only in clusters of v1.15 or later. |
+   |                  |                                                                                                                                                                | -  The add-ons that are incompatible with the target cluster version will be automatically upgraded. |                                                                                            |                                                                   |
+   |                  | Nodes are upgraded in batches. Only the nodes that have been upgraded can be used to schedule services.                                                        | -  Kubernetes components will be automatically upgraded.                                             |                                                                                            |                                                                   |
+   +------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+
 
-   +----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | Upgrade Mode         | Method                                                                                                                                                                                                                                                                                                       | Advantage                                                               | Disadvantage                                                                                                                                                                                                                                |
-   +======================+==============================================================================================================================================================================================================================================================================================================+=========================================================================+=============================================================================================================================================================================================================================================+
-   | **In-place upgrade** | Kubernetes components, network components, and CCE management components are upgraded on the node. During the upgrade, service pods and networks are not affected. The **SchedulingDisabled** label will be added to all existing nodes. After the upgrade is complete, you can properly use existing nodes. | You do not need to migrate services, ensuring service continuity.       | In-place upgrade does not upgrade the OS of a node. If you want to upgrade the OS, clear the corresponding node data after the node upgrade is complete and reset the node to upgrade the OS to a new version.                              |
-   +----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Rolling upgrade**  | Only the Kubernetes components and certain network components are upgraded on the node. The **SchedulingDisabled** label will be added to all existing nodes to ensure that the running applications are not affected.                                                                                       | Services are not interrupted.                                           | -  **After the upgrade is complete, you need to manually create nodes and gradually release the old nodes.** The new nodes are billed additionally. After services are migrated to the new nodes, the old nodes can be deleted.             |
-   |                      |                                                                                                                                                                                                                                                                                                              |                                                                         |                                                                                                                                                                                                                                             |
-   |                      | .. important::                                                                                                                                                                                                                                                                                               |                                                                         | -  After the rolling upgrade is complete, if you want to continue the upgrade to a later version, you need to reset the old nodes first. Otherwise, the pre-upgrade check cannot be passed. Services may be interrupted during the upgrade. |
-   |                      |                                                                                                                                                                                                                                                                                                              |                                                                         |                                                                                                                                                                                                                                             |
-   |                      |    NOTICE:                                                                                                                                                                                                                                                                                                   |                                                                         |                                                                                                                                                                                                                                             |
-   |                      |                                                                                                                                                                                                                                                                                                              |                                                                         |                                                                                                                                                                                                                                             |
-   |                      |    -  **After the upgrade is complete, you need to manually create nodes and gradually release the old nodes**, thereby migrating your applications to the new nodes. In this mode, you can control the upgrade process.                                                                                     |                                                                         |                                                                                                                                                                                                                                             |
-   +----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-   | **Replace upgrade**  | The latest worker node image is used to reset the node OS.                                                                                                                                                                                                                                                   | This is the fastest upgrade mode and requires few manual interventions. | Data or configurations on the node will be lost, and services will be interrupted for a period of time.                                                                                                                                     |
-   +----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+.. |image1| image:: /_static/images/en-us_image_0000001851746444.png

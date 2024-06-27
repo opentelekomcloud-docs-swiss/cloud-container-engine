@@ -1,26 +1,26 @@
-:original_name: en-us_topic_0000001550437509.html
+:original_name: cce_productdesc_0000.html
 
-.. _en-us_topic_0000001550437509:
+.. _cce_productdesc_0000:
 
 Service Overview
 ================
 
--  :ref:`What Is Cloud Container Engine? <cce_01_0091>`
+-  :ref:`What Is CCE? <cce_productdesc_0001>`
 -  :ref:`Product Advantages <cce_productdesc_0003>`
--  :ref:`Application Scenarios <cce_productdesc_0007>`
+-  :ref:`Application Scenarios <cce_productdesc_0004>`
 -  :ref:`Notes and Constraints <cce_productdesc_0005>`
 -  :ref:`Permissions <cce_productdesc_0002>`
--  :ref:`Basic Concepts <cce_productdesc_0004>`
 -  :ref:`Related Services <cce_productdesc_0008>`
+-  :ref:`Regions and AZs <cce_productdesc_0012>`
 
 .. toctree::
    :maxdepth: 1
    :hidden: 
 
-   what_is_cloud_container_engine
+   what_is_cce
    product_advantages
    application_scenarios/index
    notes_and_constraints
    permissions
-   basic_concepts/index
    related_services
+   regions_and_azs
