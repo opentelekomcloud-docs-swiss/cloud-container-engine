@@ -1,6 +1,6 @@
-:original_name: cce_02_0344.html
+:original_name: cce_02_0004.html
 
-.. _cce_02_0344:
+.. _cce_02_0004:
 
 API Usage Guidelines
 ====================
@@ -35,5 +35,5 @@ CCE provides two methods to authenticate requests for calling an API: token and 
 
    Method 3 requires that the CA root certificate must has been uploaded before you create a cluster on the CCE console.
 
-.. |image1| image:: /_static/images/en-us_image_0000001121602072.png
-.. |image2| image:: /_static/images/en-us_image_0227096557.png
+.. |image1| image:: /_static/images/en-us_image_0000001955684789.png
+.. |image2| image:: /_static/images/en-us_image_0000001928405924.png
