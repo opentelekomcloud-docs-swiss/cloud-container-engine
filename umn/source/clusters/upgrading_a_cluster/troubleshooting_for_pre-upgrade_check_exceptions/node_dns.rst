@@ -5,10 +5,10 @@
 Node DNS
 ========
 
-Check Item
-----------
+Check Items
+-----------
 
-Check the following aspects:
+Check the following items:
 
 -  Check whether the DNS configuration of the current node can resolve the OBS address.
 -  Check whether the current node can access the OBS address of the storage upgrade component package.
@@ -16,4 +16,4 @@ Check the following aspects:
 Solution
 --------
 
-During the node upgrade, you need to obtain the upgrade component package from OBS. If this check fails, contact technical support.
+During the node upgrade, obtain the upgrade component package from OBS. If this check fails, contact technical support.

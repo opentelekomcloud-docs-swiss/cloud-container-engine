@@ -106,23 +106,25 @@ If application containers on a node do not need to access Kubernetes, you can pe
 
    On the **Clusters** page of the CCE console, click the name of the cluster to find the information on the details page.
 
-#. Log in to each node in the CCE cluster as user **root** and run the following command:
+#. Configure access rules.
 
-   -  VPC network:
+   -  CCE cluster: Log in to each node in the cluster as user **root** and run the following command:
 
-      .. code-block::
+      -  VPC network:
 
-         iptables -I OUTPUT -s {container_cidr} -d {Private API server IP} -j REJECT
+         .. code-block::
 
-   -  Container tunnel network:
+            iptables -I OUTPUT -s {container_cidr} -d {Private API server IP} -j REJECT
 
-      .. code-block::
+      -  Container tunnel network:
 
-         iptables -I FORWARD -s {container_cidr} -d {Private API server IP} -j REJECT
+         .. code-block::
 
-   *{container_cidr}* indicates the container CIDR of the cluster, for example, 10.0.0.0/16.
+            iptables -I FORWARD -s {container_cidr} -d {Private API server IP} -j REJECT
 
-   To ensure configuration persistence, you are advised to write the command to the **/etc/rc.local** script.
+      *{container_cidr}* indicates the container CIDR of the cluster, for example, 10.0.0.0/16.
+
+      To ensure configuration persistence, you are advised to write the command to the **/etc/rc.local** script.
 
 #. Run the following command in the container to access kube-apiserver and check whether the request is intercepted:
 

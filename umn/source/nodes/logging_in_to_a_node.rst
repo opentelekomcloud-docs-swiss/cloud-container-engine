@@ -5,8 +5,8 @@
 Logging In to a Node
 ====================
 
-Notes and Constraints
----------------------
+Constraints
+-----------
 
 -  If you use SSH to log in to a node (an ECS), ensure that the ECS already has an EIP (a public IP address).
 -  Only login to a running ECS is allowed.
@@ -37,7 +37,7 @@ You can log in to an ECS in either of the following modes:
    +-----------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
    | EIP Binding           | On-Premises OS        | Connection Method                                                                                                                                   |
    +=======================+=======================+=====================================================================================================================================================+
-   | Yes                   | Windows               | Use a remote login tool, such as PuTTY or XShell.                                                                                                   |
+   | Yes                   | Windows               | Use a remote login tool, such as PuTTY or Xshell.                                                                                                   |
    |                       |                       |                                                                                                                                                     |
    |                       |                       | -  SSH key authentication: `Login Using an SSH Key <https://docs.sc.otc.t-systems.com/en-us/usermanual/ecs/en-us_topic_0017955380.html>`__          |
    +-----------------------+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+
