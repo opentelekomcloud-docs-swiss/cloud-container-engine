@@ -22,7 +22,7 @@ Creating a VPC
 #. The created VPC is displayed in the list. Click its name and obtain the VPC ID, which will be required in :ref:`Creating a Cluster <cce_02_0236>`.
 
 
-   .. figure:: /_static/images/en-us_image_0233731209.png
+   .. figure:: /_static/images/en-us_image_0000001955684893.png
       :alt: **Figure 1** Obtaining the VPC ID
 
       **Figure 1** Obtaining the VPC ID
@@ -37,7 +37,7 @@ Creating a Subnet
 #. After the subnet is created, click its name to obtain the network ID, which will be required in :ref:`Creating a Cluster <cce_02_0236>`.
 
 
-   .. figure:: /_static/images/en-us_image_0233732535.png
+   .. figure:: /_static/images/en-us_image_0000001928565376.png
       :alt: **Figure 2** Obtaining the network ID of a subnet
 
       **Figure 2** Obtaining the network ID of a subnet

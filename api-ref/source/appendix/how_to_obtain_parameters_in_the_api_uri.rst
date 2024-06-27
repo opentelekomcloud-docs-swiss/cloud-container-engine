@@ -13,7 +13,7 @@ project_id
 #. On the **Projects** tab page, obtain the project ID of the corresponding region.
 
 
-   .. figure:: /_static/images/en-us_image_0203982493.png
+   .. figure:: /_static/images/en-us_image_0000001955804645.png
       :alt: **Figure 1** Viewing project IDs
 
       **Figure 1** Viewing project IDs
@@ -26,7 +26,7 @@ cluster_id
 #. Click the name of the created cluster. The cluster details page is displayed. Obtain the cluster ID.
 
 
-   .. figure:: /_static/images/en-us_image_0233732613.png
+   .. figure:: /_static/images/en-us_image_0000001928565332.png
       :alt: **Figure 2** Obtaining the cluster ID
 
       **Figure 2** Obtaining the cluster ID
@@ -39,7 +39,7 @@ node_id
 #. Click the node name to go to the node details page and obtain the node ID.
 
 
-   .. figure:: /_static/images/en-us_image_0279177365.png
+   .. figure:: /_static/images/en-us_image_0000001928565340.png
       :alt: **Figure 3** Obtaining the node ID
 
       **Figure 3** Obtaining the node ID
@@ -56,7 +56,7 @@ job_id
    If you are using Google Chrome, press **F12**. On the pane displayed on the right, click the **Network** tab. Enter **jobs** in the **Filter** text box to filter the job list. Select a job from the list on the left and click **Preview**. The UID field indicates the UID of the job.
 
 
-   .. figure:: /_static/images/en-us_image_0203982464.png
+   .. figure:: /_static/images/en-us_image_0000001928405980.png
       :alt: **Figure 4** Obtaining the job ID
 
       **Figure 4** Obtaining the job ID
