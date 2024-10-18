@@ -19,20 +19,20 @@ This section describes how to troubleshoot the problems occurred when you accept
 Notes and Constraints
 ---------------------
 
--  The cluster version must be 1.15 or later.
--  If a password or key has been set when the original VM node was created, reset the password or key during management. The original password or key will become invalid.
--  Data disks that have been partitioned will be ignored during node management. Ensure that there is at least one unpartitioned data disk meeting the specifications is attached to the node.
+-  ECSs can be managed.
 
 Prerequisites
 -------------
 
-A cloud server that meets the following conditions can be accepted:
+The cloud servers to be managed must meet the following requirements:
 
 -  The node to be accepted must be in the **Running** state and not used by other clusters. In addition, the node to be accepted does not carry the CCE-Dynamic-Provisioning-Node tag.
 -  The node to be accepted and the cluster must be in the same VPC. (If the cluster version is earlier than v1.13.10, the node to be accepted and the CCE cluster must be in the same subnet.)
 -  Data disks must be attached to the nodes to be managed. A local disk (disk-intensive disk) or a data disk of at least 20 GiB can be attached to the node, and any data disks already attached cannot be smaller than 10 GiB.
 -  The node to be accepted has 2-core or higher CPU, 4 GiB or larger memory, and only one NIC.
--  Only cloud servers with the same specifications, AZ, and data disk configuration can be added in batches.
+-  Only cloud servers with the same data disk configurations can be added in batches.
+-  If IPv6 is enabled for a cluster, only nodes in a subnet with IPv6 enabled can be accepted and managed. If IPv6 is not enabled for the cluster, only nodes in a subnet without IPv6 enabled can be accepted.
+-  Data disks that have been partitioned will be ignored during node management. Ensure that there is at least one unpartitioned data disk meeting the specifications is attached to the node.
 
 Procedure
 ---------

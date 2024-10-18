@@ -5,6 +5,8 @@
 CCE Console Upgrade
 ===================
 
+**Released**: Sep 3, 2023
+
 Dear users,
 
 We are pleased to announce that a brand-new CCE console is available. The new console is modern, visually appealing, and concise, providing a more comfortable and enjoyable user experience.
@@ -69,6 +71,8 @@ CCE has made the following changes to the **Add-ons** page:
    |                                      | Volcano Scheduler                  | volcano                      | CCE proprietary      |
    +--------------------------------------+------------------------------------+------------------------------+----------------------+
    | Cloud native observability           | CCE Node Problem Detector          | npd                          | CCE proprietary      |
+   +--------------------------------------+------------------------------------+------------------------------+----------------------+
+   |                                      | Cloud Native Cluster Monitoring    | kube-prometheus-stack        | CCE proprietary      |
    +--------------------------------------+------------------------------------+------------------------------+----------------------+
    |                                      | Kubernetes Metrics Server          | metrics-server               | Featured open source |
    +--------------------------------------+------------------------------------+------------------------------+----------------------+

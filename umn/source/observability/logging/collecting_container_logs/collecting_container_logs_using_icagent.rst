@@ -17,7 +17,7 @@ Using ICAgent to Collect Logs
 
 #. When :ref:`creating a workload <cce_10_0047>`, set logging for the container.
 #. Click |image1| to add a log policy.
-#. Set **Volume Type** to **hostPath** or **EmptyDir**.
+#. Set **Volume Type** to **hostPath** or **emptyDir**.
 
    .. table:: **Table 1** Configuring log policies
 
@@ -240,7 +240,7 @@ After the log collection is complete, go to the workload details page and click 
 
 You can also view logs on the AOM console.
 
-You can also run the **kubectl logs** command to view the standard output of a container.
+You can also run the **kubectl logs** command to view the container stdout.
 
 .. code-block::
 
@@ -254,4 +254,4 @@ You can also run the **kubectl logs** command to view the standard output of a c
    kubectl logs pod_name -c container_name -n namespace (one-off query)
    kubectl logs -f <pod_name> -n namespace (real-time query in tail -f mode)
 
-.. |image1| image:: /_static/images/en-us_image_0000001898026057.png
+.. |image1| image:: /_static/images/en-us_image_0000001950317236.png

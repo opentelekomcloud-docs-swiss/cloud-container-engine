@@ -14,7 +14,7 @@ An ingress is an independent resource in the Kubernetes cluster and defines rule
 
 .. _cce_10_0094__fig18155819416:
 
-.. figure:: /_static/images/en-us_image_0000001851587340.png
+.. figure:: /_static/images/en-us_image_0000001950317392.png
    :alt: **Figure 1** Ingress diagram
 
    **Figure 1** Ingress diagram
@@ -37,7 +37,7 @@ LoadBalancer Ingress Controller is deployed on the master node and bound to the 
 
 .. _cce_10_0094__fig122542486129:
 
-.. figure:: /_static/images/en-us_image_0000001851587344.png
+.. figure:: /_static/images/en-us_image_0000001981276941.png
    :alt: **Figure 2** Working rules of shared LoadBalancer ingresses in CCE standard clusters
 
    **Figure 2** Working rules of shared LoadBalancer ingresses in CCE standard clusters
@@ -47,7 +47,7 @@ LoadBalancer Ingress Controller is deployed on the master node and bound to the 
 Services Supported by Ingresses
 -------------------------------
 
-:ref:`Table 1 <cce_10_0094__table143264518141>` lists the services supported by LoadBalancer ingresses.
+:ref:`Table 1 <cce_10_0094__table143264518141>` lists the Services supported by LoadBalancer ingresses.
 
 .. _cce_10_0094__table143264518141:
 
