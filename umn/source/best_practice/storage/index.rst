@@ -7,9 +7,9 @@ Storage
 
 -  :ref:`Expanding the Storage Space <cce_bestpractice_00198>`
 -  :ref:`Mounting an Object Storage Bucket of a Third-Party Tenant <cce_bestpractice_00199>`
--  :ref:`How Do I Change the Storage Class Used by a Cluster of v1.15 from FlexVolume to CSI Everest? <cce_bestpractice_0107>`
--  :ref:`Custom Storage Classes <cce_bestpractice_00281>`
--  :ref:`Enabling Automatic Topology for EVS Disks When Nodes Are Deployed in Different AZs (csi-disk-topology) <cce_bestpractice_00284>`
+-  :ref:`Changing the Storage Class Used by a Cluster of v1.15 from FlexVolume to CSI Everest <cce_bestpractice_0107>`
+-  :ref:`Using Custom Storage Classes <cce_bestpractice_00281>`
+-  :ref:`Scheduling EVS Disks Across AZs Using csi-disk-topology <cce_bestpractice_00284>`
 
 .. toctree::
    :maxdepth: 1
@@ -17,6 +17,6 @@ Storage
 
    expanding_the_storage_space
    mounting_an_object_storage_bucket_of_a_third-party_tenant
-   how_do_i_change_the_storage_class_used_by_a_cluster_of_v1.15_from_flexvolume_to_csi_everest
-   custom_storage_classes
-   enabling_automatic_topology_for_evs_disks_when_nodes_are_deployed_in_different_azs_csi-disk-topology
+   changing_the_storage_class_used_by_a_cluster_of_v1.15_from_flexvolume_to_csi_everest
+   using_custom_storage_classes
+   scheduling_evs_disks_across_azs_using_csi-disk-topology

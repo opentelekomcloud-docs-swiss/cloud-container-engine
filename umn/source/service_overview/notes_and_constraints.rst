@@ -47,6 +47,8 @@ Networks
          |                       |                       |                                          |
          |                       |                       | 4.18.0-147.5.1.6.h998.eulerosv2r9.x86_64 |
          +-----------------------+-----------------------+------------------------------------------+
+         | HCE OS 2.0            | v1.25 or later        | 5.10.0-60.18.0.50.r865_35.hce2.x86_64    |
+         +-----------------------+-----------------------+------------------------------------------+
 
    -  Network isolation is not supported for IPv6 addresses.
    -  If upgrade to a cluster version that supports egress rules is performed in in-place mode, you cannot use egress rules because the node OS is not upgraded. In this case, reset the node.

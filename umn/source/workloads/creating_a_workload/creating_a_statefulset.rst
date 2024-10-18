@@ -12,8 +12,8 @@ StatefulSets are a type of workloads whose data or status is stored while they a
 
 A container can be migrated between different hosts, but data is not stored on the hosts. To store StatefulSet data persistently, attach HA storage volumes provided by CCE to the container.
 
-Constraints
------------
+Notes and Constraints
+---------------------
 
 -  When you delete or scale a StatefulSet, the system does not delete the storage volumes associated with the StatefulSet to ensure data security.
 -  When you delete a StatefulSet, reduce the number of replicas to **0** before deleting the StatefulSet so that pods in the StatefulSet can be stopped in order.
@@ -105,7 +105,7 @@ Using the CCE Console
 
          .. note::
 
-            -  StatefulSets support dynamic attachment of EVS disks. For details, see :ref:`Dynamically Mounting an EVS Disk to a StatefulSet <cce_10_0616>` and :ref:`Dynamically Mounting a Local PV to a StatefulSet <cce_10_0635>`.
+            -  StatefulSets support dynamic attachment of EVS disks. For details, see :ref:`Dynamically Mounting an EVS Disk to a StatefulSet <cce_10_0616>` or :ref:`Dynamically Mounting a Local PV to a StatefulSet <cce_10_0635>`.
 
                Dynamic mounting is achieved by using the `volumeClaimTemplates <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#volume-claim-templates>`__ field and depends on the dynamic creation capability of StorageClass. A StatefulSet associates each pod with a PVC using the **volumeClaimTemplates** field, and the PVC is bound to the corresponding PV. Therefore, after the pod is rescheduled, the original data can still be mounted based on the PVC name.
 
@@ -133,7 +133,7 @@ Using the CCE Console
 
    **(Optional) Advanced Settings**
 
-   -  **Upgrade**: Specify the upgrade mode and parameters of the workload. **Rolling upgrade** and **Replace upgrade** are available. For details, see :ref:`Workload Upgrade Policies <cce_10_0397>`.
+   -  **Upgrade**: Specify the upgrade mode and parameters of the workload. **Rolling upgrade** and **Replace upgrade** are available. For details, see :ref:`Configuring Workload Upgrade Policies <cce_10_0397>`.
 
    -  **Pod Management Policies**
 
@@ -156,9 +156,9 @@ Using the CCE Console
          -  **Specified node pool scheduling**: Workload pods can be deployed in a specified node pool through node affinity (**nodeAffinity**). If no node pool is specified, the pods will be randomly scheduled based on the default scheduling policy of the cluster.
          -  **Custom policies**: Affinity and anti-affinity policies can be customized as needed. For details, see :ref:`Scheduling Policies (Affinity/Anti-affinity) <cce_10_0232>`.
 
-   -  **Toleration**: Using both taints and tolerations allows (not forcibly) the pod to be scheduled to a node with the matching taints, and controls the pod eviction policies after the node where the pod is located is tainted. For details, see :ref:`Taints and Tolerations <cce_10_0728>`.
+   -  **Toleration**: Using both taints and tolerations allows (not forcibly) the pod to be scheduled to a node with the matching taints, and controls the pod eviction policies after the node where the pod is located is tainted. For details, see :ref:`Configuring Tolerance Policies <cce_10_0728>`.
 
-   -  **Labels and Annotations**: Add labels or annotations for pods using key-value pairs. After entering the key and value, click **Confirm**. For details about how to use and configure labels and annotations, see :ref:`Labels and Annotations <cce_10_0386>`.
+   -  **Labels and Annotations**: Add labels or annotations for pods using key-value pairs. After entering the key and value, click **Confirm**. For details about how to use and configure labels and annotations, see :ref:`Configuring Labels and Annotations <cce_10_0386>`.
 
    -  **DNS**: Configure a separate DNS policy for the workload. For details, see :ref:`DNS Configuration <cce_10_0365>`.
 
@@ -173,7 +173,7 @@ Using kubectl
 
 In this example, a Nginx workload is used and the EVS volume is dynamically mounted to it using the **volumeClaimTemplates** field.
 
-#. Use kubectl to connect to the cluster. For details, see :ref:`Connecting to a Cluster Using kubectl <cce_10_0107>`.
+#. Use kubectl to access the cluster. For details, see :ref:`Connecting to a Cluster Using kubectl <cce_10_0107>`.
 
 #. Create and edit the **nginx-statefulset.yaml** file.
 
@@ -237,7 +237,7 @@ In this example, a Nginx workload is used and the EVS volume is dynamically moun
               resources:
                 requests:
                   storage: 10Gi
-              storageClassName: csi-disk # Storage class name. The value is csi-disk for the EVS volume.
+              storageClassName: csi-disk # StorageClass name. The value is csi-disk for the EVS volume.
         updateStrategy:
           type: RollingUpdate
 

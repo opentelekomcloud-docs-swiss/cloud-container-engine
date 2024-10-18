@@ -26,7 +26,7 @@ Basic Concepts
    A subnet is a network that manages ECS network planes. It supports IP address management and DNS. The IP addresses of all ECSs in a subnet belong to the subnet.
 
 
-   .. figure:: /_static/images/en-us_image_0000001851585668.png
+   .. figure:: /_static/images/en-us_image_0000001950315844.png
       :alt: **Figure 1** VPC CIDR block architecture
 
       **Figure 1** VPC CIDR block architecture
@@ -57,7 +57,7 @@ Single-VPC Single-Cluster Scenarios
 
 .. _cce_bestpractice_00004__en-us_topic_0099587154_fig15791152874920:
 
-.. figure:: /_static/images/en-us_image_0000001851744412.png
+.. figure:: /_static/images/en-us_image_0000001950315916.png
    :alt: **Figure 2** Network CIDR block planning in single-VPC single-cluster scenarios (CCE cluster)
 
    **Figure 2** Network CIDR block planning in single-VPC single-cluster scenarios (CCE cluster)
@@ -76,7 +76,7 @@ Pod packets are forwarded through VPC routes. CCE automatically configures a rou
 
 .. _cce_bestpractice_00004__en-us_topic_0099587154_fig69527530400:
 
-.. figure:: /_static/images/en-us_image_0000001897905069.png
+.. figure:: /_static/images/en-us_image_0000001981275449.png
    :alt: **Figure 3** VPC network - multi-cluster scenario
 
    **Figure 3** VPC network - multi-cluster scenario
@@ -92,7 +92,7 @@ Though at some cost of performance, the tunnel encapsulation enables higher inte
 
 .. _cce_bestpractice_00004__en-us_topic_0099587154_fig8672112184219:
 
-.. figure:: /_static/images/en-us_image_0000001898024565.png
+.. figure:: /_static/images/en-us_image_0000001981275365.png
    :alt: **Figure 4** Tunnel network - multi-cluster scenario
 
    **Figure 4** Tunnel network - multi-cluster scenario
@@ -116,7 +116,7 @@ If VPCs cannot communicate with each other, a VPC peering connection is used to 
 To allow clusters that use VPC networks to access each other across VPCs, add routes to the two ends of the VPC peering after a VPC peering connection is created.
 
 
-.. figure:: /_static/images/en-us_image_0000001897905025.png
+.. figure:: /_static/images/en-us_image_0000001981275361.png
    :alt: **Figure 5** VPC network - VPC interconnection scenario
 
    **Figure 5** VPC network - VPC interconnection scenario
@@ -125,7 +125,7 @@ When creating a VPC peering connection between containers across VPCs, pay atten
 
 -  The VPC to which the clusters belong must not overlap. In each cluster, the subnet CIDR block cannot overlap with the container CIDR block.
 -  The container CIDR blocks of clusters at both ends cannot overlap, but the Service CIDR blocks can.
--  If the request end cluster uses the VPC network, check whether the node security group in the destination cluster allows the container CIDR block of the request end cluster. If yes, pods in one cluster can directly access pods in another cluster through the pod IP address. Similarly, if nodes running in the clusters at the two ends of the VPC peering connection need to access each other, the node security group must allow the VPC CIDR block of the peer cluster.
+-  If the request end cluster uses the VPC network, check whether the node security group in the destination cluster allows the container CIDR block of the request end cluster. If yes, pods in one cluster can directly access pods in another cluster through the pod IP addresses. Similarly, if nodes running in the clusters at the two ends of the VPC peering connection need to access each other, the node security group must allow the VPC CIDR block of the peer cluster.
 -  You need to add routes for accessing the peer network CIDR block to the VPC routing tables at both ends. For example, you need to add a route for accessing the CIDR block of VPC 2 to the route table of VPC 1, and add a route for accessing VPC 1 to the route table of VPC 2.
 
    -  **Add the VPC CIDR block of the peer cluster**: After the route of the VPC CIDR block is added, a pod in a cluster can access another cluster node. For example, the pod can access the port of a NodePort Service.
@@ -136,7 +136,7 @@ When creating a VPC peering connection between containers across VPCs, pay atten
 To allow clusters that use tunnel networks to access each other across VPCs, add routes to the two ends of the VPC peering after a VPC peering connection is created.
 
 
-.. figure:: /_static/images/en-us_image_0000001897905033.png
+.. figure:: /_static/images/en-us_image_0000001950315840.png
    :alt: **Figure 6** Tunnel network - VPC interconnection scenario
 
    **Figure 6** Tunnel network - VPC interconnection scenario

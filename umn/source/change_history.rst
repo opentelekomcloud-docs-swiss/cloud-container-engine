@@ -10,6 +10,13 @@ Change History
    +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | Released On                       | What's New                                                                                                                                      |
    +===================================+=================================================================================================================================================+
+   | 2024-10-10                        | -  Supported the creation of clusters of v1.29.                                                                                                 |
+   |                                   | -  Supported IPv6.                                                                                                                              |
+   |                                   | -  Added the Cloud Native Cluster Monitoring add-on.                                                                                            |
+   |                                   | -  Added to all add-ons the change history.                                                                                                     |
+   |                                   | -  Deleted section "Kubernetes Version Support Mechanism".                                                                                      |
+   |                                   | -  Added :ref:`Kubernetes Version Policy <cce_bulletin_0033>`.                                                                                  |
+   +-----------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------+
    | 2024-06-20                        | -  Supported the creation of clusters of v1.27 and 1.28.                                                                                        |
    |                                   | -  Modified the console style.                                                                                                                  |
    |                                   | -  HCE OS 2.0 is supported.                                                                                                                     |
