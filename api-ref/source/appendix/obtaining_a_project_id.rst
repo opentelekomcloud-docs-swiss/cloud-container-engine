@@ -52,7 +52,7 @@ A project ID is required for some URLs when an API is called. To obtain a projec
    On the **My Credentials** page, view project IDs in the project list.
 
 
-   .. figure:: /_static/images/en-us_image_0000001928405952.png
+   .. figure:: /_static/images/en-us_image_0203982368.png
       :alt: **Figure 1** Obtaining the Project ID
 
       **Figure 1** Obtaining the Project ID

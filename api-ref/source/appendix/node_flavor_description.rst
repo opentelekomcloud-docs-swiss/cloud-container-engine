@@ -13,7 +13,7 @@ Node Flavor Description
 
    CCE clusters support only 2 vCPUs and 4 GiB or higher specifications. You are advised to query node specifications on the console. For details about node specifications, see ECS Specifications.
 
-   You need to enter the specific flavor name, for example,\ **s3.large.2**.
+   You need to enter the specific flavor name, for example, **s3.large.2**.
 
    The following tables list the specifications supported by CCE. (The specifications of some ECS models vary by region. The actual specifications displayed on the console are used.)
 
