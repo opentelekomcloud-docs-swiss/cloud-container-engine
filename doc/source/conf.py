@@ -91,8 +91,6 @@ html_theme = 'otcdocs'
 # further. For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    "site_name": "Swiss Open Telekom Cloud Docs",
-    "logo_url": "https://docs-beta.sc.otc.t-systems.com",
 }
 
 # The name for this set of Sphinx documents.  If None, it defaults to
@@ -105,6 +103,7 @@ html_title = "Cloud Container Engine - Service Based View"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+templates_path = ['_templates']
 
 # Do not include sources into the rendered results
 html_copy_source = False
@@ -117,3 +116,11 @@ repo = Repo(search_parent_directories=True)
 commit = repo.head.commit
 current_commit_hash = commit.hexsha
 current_commit_time = commit.committed_datetime.strftime('%Y-%m-%d %H:%M')
+
+latex_elements = {
+  'papersize': 'a4paper',
+  'pointsize': '12pt',
+  'figure_align': 'H',
+  'preamble': r'\newcommand{\githash}{' + current_commit_hash + '}',
+  'sphinxsetup': 'hmargin={15mm,15mm}, vmargin={20mm,30mm}, marginpar=10mm'
+}
