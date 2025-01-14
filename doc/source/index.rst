@@ -7,6 +7,7 @@ CCE provides highly scalable, high-performance, enterprise-class Kubernetes clus
    :class: container-sbv
 
    .. service_card::
+      :environment: internal
       :service_type: cce
       :umn: Describes the basic concepts, functions, key terms, best practices, FAQs and steps for quickly creating clusters and containerized applications.
       :api-ref: Describes the APIs provided by CCE including the functions, parameters, and examples of each API.
