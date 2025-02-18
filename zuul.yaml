@@ -3,7 +3,11 @@
     merge-mode: squash-merge
     default-branch: main
     templates:
-      - helpcenter-swiss-base-jobs
+      - helpcenter-base-jobs
+    vars:
+      sphinx_pdf_files:
+        - cce-umn.pdf
+        - cce-api-ref.pdf
     check:
       jobs:
         - noop
