@@ -38,6 +38,7 @@ otcdocs_doc_type = 'api-ref'
 otcdocs_service_category = 'container'
 otcdocs_service_title = 'Cloud Container Engine'
 otcdocs_service_type = 'cce'
+otcdocs_cloud_environment = 'swiss'
 otcdocs_search_environment = 'hc_swiss'
 otcdocs_search_index = 'search_index_swiss'
 otcdocs_search_url = "https://opensearch.eco.tsi-dev.otc-service.com/"
@@ -111,7 +112,7 @@ html_copy_source = False
 latex_documents = [
     ('index',
      'cce-api-ref.tex',
-     u'Cloud Container Engine - API Reference',
+    u'Cloud Container Engine - API Reference',
      u'OpenTelekomCloud', 'manual'),
 ]
 
@@ -125,6 +126,11 @@ latex_elements = {
   'papersize': 'a4paper',
   'pointsize': '12pt',
   'figure_align': 'H',
-  'preamble': r'\newcommand{\githash}{' + current_commit_hash + '}',
+  'preamble': rf'''
+        \newcommand{{\githash}}{{{current_commit_hash}}}
+        \newcommand{{\gitcommittime}}{{{current_commit_time}}}
+        \newcommand{{\doctitle}}{{{otcdocs_doc_title}}}
+        \newcommand{{\servicetitle}}{{{otcdocs_service_title}}}
+  ''',
   'sphinxsetup': 'hmargin={15mm,15mm}, vmargin={20mm,30mm}, marginpar=10mm'
 }
